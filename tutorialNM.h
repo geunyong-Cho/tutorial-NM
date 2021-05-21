@@ -18,6 +18,9 @@ Description      : myNM.h
 #include <math.h>
 #include "myMatrix.h"
 
+// New function add
+void gradient2(double xin[]);
+
 // BisectionNL
 extern double bisection(double _a0, double _b0, double _tol);
 
