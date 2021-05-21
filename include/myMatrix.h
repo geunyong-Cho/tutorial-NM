@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------\
 @ Numerical Methods by Young-Keun Kim - Handong Global University
 
-Author           : [YOUR NAME]
+Author           : [Cho Geunyong]
 Created          : 26-03-2018
-Modified         : 18-03-2021
+Modified         : 30-04-2021
 Language/ver     : C++ in MSVS2019
 
 Description      : myMatrix.h
@@ -16,50 +16,72 @@ Description      : myMatrix.h
 #include <string>
 #include <fstream>
 
-typedef struct { 
+typedef struct {
 	double** at;
 	int rows, cols;
 }Matrix;
 
-//using namespace std;
-
 // Create Matrix with specified size
-extern	Matrix	createMat(int _rows, int _cols);
-
-// Free a memory allocated matrix
-extern	void	freeMat(Matrix _A);
+extern	Matrix createMat(int _rows, int _cols);
 
 // Create a matrix from a text file
-extern	Matrix	txt2Mat(std::string _filePath, std::string _fileName);
+// basic
+extern	Matrix txt2Mat(std::string _filePath, std::string _fileName);
 
-//// Print matrix
-extern	void	printMat(Matrix _A, const char* _name);
+extern	void printMat(Matrix _A, const char* _name);
 
+extern Matrix copyMat(Matrix _A);
 
+extern Matrix transposeMat(Matrix _A);
 
+extern Matrix addMat(Matrix _A, Matrix _B);
 
-/// It is recommended to create the following functions.
+extern Matrix multMat(Matrix _A, Matrix _B);
 
-// initialization of Matrix elements
-extern	void	initMat(Matrix _A, double _val);
+extern Matrix eye(int _rows, int _cols);
 
-// Create matrix of all zeros
-extern	Matrix	zeros(int _rows, int _cols);
+extern Matrix minus(Matrix _A);
 
-// Create matrix of all ones
-extern	Matrix	ones(int _rows, int _cols);
+extern void initMat(Matrix _A, double _val);
 
-// Create identity 
-extern	Matrix	eye(int _rows, int _cols);
+extern Matrix zeros(int _rows, int _cols);
 
-// Create Transpose matrix
-extern	Matrix	transpose(Matrix _A);
+extern Matrix ones(int _rows, int _cols);
 
-// Copy matrix
-extern	Matrix	copyMat(Matrix _A);
+// QR factorization
+extern double normMat(Matrix _A);
 
-// Copy matrix Elements from A to B
-extern	void	copyVal(Matrix _A, Matrix _B);
+extern Matrix constdivideMat(Matrix _A, Matrix _B);
 
+extern Matrix Vector_c(Matrix _A, int a);
+
+extern Matrix Vector_e(Matrix _A, int _k, double _ck);
+
+extern Matrix multconstant(double _a, Matrix _A);
+
+extern Matrix Eigenvalue_withQR(Matrix _A, Matrix _Q, Matrix _R);
+
+extern Matrix eig_value(Matrix _A);
+
+extern double cond(Matrix _A);
+
+// LU decomposition
+extern void swapVal(Matrix _A, int a, int b);
+
+extern	Matrix	backSub(Matrix _A, Matrix _b);
+
+extern	Matrix  fwdSub(Matrix _A, Matrix _b);
+
+extern Matrix gaussElimU(Matrix _A, Matrix _b, Matrix _U, Matrix _d);
+
+extern Matrix gaussElimd(Matrix _A, Matrix _b, Matrix _U, Matrix _d);
+
+void gaussjordan(Matrix _A, Matrix _b, Matrix _U, Matrix _d);
+
+extern void LUdecomp(Matrix _A, Matrix _L, Matrix _U, Matrix _P);
+
+extern Matrix solveLU(Matrix _L, Matrix _U, Matrix _b, Matrix _P);
+
+extern Matrix inv(Matrix _A, Matrix _Ainv);
 
 #endif
